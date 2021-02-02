@@ -1,0 +1,14 @@
+
+spring:
+  datasource:
+    url: jdbc:mysql://mysql:3306/sampledb
+    username: user
+    password: password
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        id:
+          new_generator_mappings: false
