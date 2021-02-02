@@ -39,7 +39,8 @@ public class PersonController {
             person.setAddress(faker.address().fullAddress());
             personService.save(person);
         }
-        return new ResponseEntity<>("Loaded Successfully", HttpStatus.OK);
+        log.info("New persons saved successfully!");
+        return new ResponseEntity<>("New persons loaded Successfully", HttpStatus.OK);
     }
 
     @PostMapping
