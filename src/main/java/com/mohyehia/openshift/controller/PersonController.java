@@ -3,6 +3,7 @@ package com.mohyehia.openshift.controller;
 import com.github.javafaker.Faker;
 import com.mohyehia.openshift.entity.Address;
 import com.mohyehia.openshift.entity.Person;
+import com.mohyehia.openshift.service.framework.AddressService;
 import com.mohyehia.openshift.service.framework.PersonService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -16,9 +17,11 @@ import java.util.List;
 @Log4j2
 public class PersonController {
     private final PersonService personService;
+    private final AddressService addressService;
 
-    public PersonController(PersonService personService) {
+    public PersonController(PersonService personService, AddressService addressService) {
         this.personService = personService;
+        this.addressService = addressService;
     }
 
     @GetMapping
@@ -43,6 +46,7 @@ public class PersonController {
             address.setCity(faker.address().city());
             address.setState(faker.address().state());
             address.setBuildingNumber(faker.address().buildingNumber());
+            address = addressService.save(address);
             person.setAddress(address);
             personService.save(person);
         }
