@@ -1,6 +1,7 @@
 package com.mohyehia.openshift.controller;
 
 import com.github.javafaker.Faker;
+import com.mohyehia.openshift.entity.Address;
 import com.mohyehia.openshift.entity.Person;
 import com.mohyehia.openshift.service.framework.PersonService;
 import lombok.extern.log4j.Log4j2;
@@ -31,12 +32,18 @@ public class PersonController {
         log.info("PersonController :: loadPersonsToDb :: start");
         Faker faker = new Faker();
         Person person;
-        for (int i = 0; i < 20; i++) {
+        Address address;
+        for (int i = 0; i < 10; i++) {
             person = new Person();
             person.setFirstName(faker.name().firstName());
             person.setLastName(faker.name().lastName());
             person.setJob(faker.job().title());
-            person.setAddress(faker.address().fullAddress());
+            address = new Address();
+            address.setCountry(faker.address().country());
+            address.setCity(faker.address().city());
+            address.setState(faker.address().state());
+            address.setBuildingNumber(faker.address().buildingNumber());
+            person.setAddress(address);
             personService.save(person);
         }
         log.info("New persons saved successfully!");

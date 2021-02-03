@@ -14,5 +14,7 @@ public class Person {
     private String firstName;
     private String lastName;
     private String job;
-    private String address;
+    @OneToOne
+    @JoinColumn(name = "address", referencedColumnName = "id")
+    private Address address;
 }
